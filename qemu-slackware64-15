@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# A Simple script for beginers to download an install Slackware64 15 in their QEMU
+# Anagnostakis Ioannis (rizitis) GR Crete 01/2023 <rizitis@gmail.com>
+#
+# Assume that you have QEMU in your installation!!! If not first install qemu from your distro package manager...
+# 
+# =========================HOWTO==================
+# 1) Download and put this script to a folder in your /home
+#
+# 2) open a terminal in that folder and do:
+# ls -l qemu-slackware64-15 
+# If the output is like this -rwxr-xr-x  means that script is executable. If its not like this, then first make it executable: chmod +x qemu-slackware64-15
+# And then just comand:
+# ./qemu-slackware64-15  to run script.
+#
+# 3) Script will create a qemu base.img which will need 80G of your space. If you dont like that, change the space value as you like at 88 line of this script (80G)
+#
+# 4) It will download the OVMF.zip and will unzip it also, so we can boot Slackware64 in UEFI mode
+# AND it will download slackware64.iso after that it will check md5summ files and then QEMU will boot slackware.iso in your 80G virtuall hdd myslackware.img you created.
+# If you allready have a Slackware.iso in your system you can skip this step and save your time... so comment  script lines to stop downloading:
+# and do them like this:
+#    ##wget -P $OSFOLDER $URL1
+#    ##wget -P $OSFOLDER $URL2
+#    ##md5sum $ISO $PKG2
+# 
+# IF you EDIT script DONT forget to save changes before you run it... :D 
+
+# After installation finish, you can boot from your myslackware.img like this:
+# open a terminal in the folder /home/user/qemu-slackware and run:
+#  qemu-sqemu-system-x86_64 -bios OVMF.fd -hda myslackware.img -enable-kvm  -m 8G -smp cores=10 -cpu host -boot order=c,once=d,menu=on -vga std
+# Ofcource you can edit these as your hardware will work better... (cores=? -m ?G etc)
+#
+# issues 
+# # if you chose Grub as bootloader and skip elilo during installation  first be sure that you know how to install grub in slackware... 
+# this video will help you a lot to be a Slacker https://www.youtube.com/watch?v=OZeJd5JPQro
+# If you did everything OK but still you have error when you try to install Grub, then try this command as long you are chroot in /mnt
+# grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --removable && grub-mkconfig -o /boot/grub/grub.cfg
+#
+# Good Luck ;)
+#============READ THIS====================================================
+#Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+USR=var=$(whoami)
+ISO=slackware15.iso
+NAME=myslackware.img
+OSFOLDER=/home/$USR/qemu-slackware
+URL=https://altushost-swe.dl.sourceforge.net/project/edk2/OVMF/OVMF-X64-r15214.zip
+URL1=https://mirrors.slackware.com/slackware/slackware-iso/slackware64-15.0-iso/slackware64-15.0-install-dvd.iso
+URL2=https://mirrors.slackware.com/slackware/slackware-iso/slackware64-15.0-iso/slackware64-15.0-install-dvd.iso.md5
+PKG=OVMF-X64-r15214.zip
+PKG2=slackware64-15.0-install-dvd.iso.md5
+PKG1=OVMF.fd
+CORES=cores=10
+
+mkdir -p /home/"$USR"/qemu-slackware
+cd "$OSFOLDER" || exit
+wget -PO  "$OSFOLDER"/slackware15.iso $URL1
+wget -P "$OSFOLDER" $URL2
+md5sum $ISO $PKG2
+sleep 5
+wget $URL
+unzip $PKG
+
+echo "Creating Virtual HDD image to install ISO..."
+if [ -f "$OSFOLDER"/OVMF.fd ] ; then
+  echo -e "\e[1;36m Good news OVMF.fd Found\e[0m"
+ else
+  echo "OVMF.fd not found, you will not boot in UEFI mode"
+  exit;
+fi 
+
+echo "Creating Virtual HDD image to install ISO..."
+qemu-img create $NAME 80G
+sleep 10
+
+echo "Booting your ISO..."
+qemu-system-x86_64 \
+-bios $PKG1 \
+-cdrom $ISO \
+-enable-kvm \
+ -m 8G \
+ -smp $CORES \
+ -cpu host \
+ -boot order=c,once=d,menu=on \
+ -vga std  -hda $NAME &
+
