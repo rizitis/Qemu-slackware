@@ -3,7 +3,12 @@
 # A Simple script for beginers to download an install Slackware64 15 in their QEMU
 # Anagnostakis Ioannis (rizitis) GR Crete 01/2023 <rizitis@gmail.com>
 #
-# Assume that you have QEMU in your installation!!! If not first install qemu from your distro package manager...
+#=============MUST HAVE=============================
+# Assume that you have QEMU (qemu-kvm) and all deps in your installation!!! If not first install qemu from your distro package manager...
+# But before that, chek if your cpu support KVM. You can find it with this command 
+# egrep egrep -c '(vmx|svm)' /proc/cpuinfo  <---If the output is biger than 0 you are ok
+# If the output is 0 you must turn on KVM support from your BIOS menu.
+# If its smaller than 0 :( Forget it...
 # 
 # =========================HOWTO==================
 # 1) Download and put this script to a folder in your /home
@@ -14,7 +19,7 @@
 # And then just comand:
 # ./qemu-slackware64-15  to run script.
 #
-# 3) Script will create a qemu base.img which will need 80G of your space. If you dont like that, change the space value as you like at 88 line of this script (80G)
+# 3) Script will create a qemu base.img which will need 80G of your space. If you dont like that, change the space value as you like at 94 line in this script (80G)
 #
 # 4) It will download the OVMF.zip and will unzip it also, so we can boot Slackware64 in UEFI mode
 # AND it will download slackware64.iso after that it will check md5summ files and then QEMU will boot slackware.iso in your 80G virtuall hdd myslackware.img you created.
