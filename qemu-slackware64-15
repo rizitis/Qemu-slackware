@@ -76,8 +76,8 @@ mkdir -p /home/"$USR"/qemu-slackware
 cd "$OSFOLDER" || exit
 wget -O  "$OSFOLDER"/slackware15.iso $URL1
 wget -P "$OSFOLDER" $URL2
-md5sum -c slackware64-15.0-install-dvd.iso.md5
 
+md5sum -c $PKG2
 if [ $? -eq 0 ]; then
   echo File is fine. lets continue...
 else
