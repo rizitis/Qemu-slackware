@@ -13,7 +13,8 @@ Everything else you need is in the script...read it!
 
 Good Luck ;)
 
-##REQUIRE: 
+### REQUIRED: 
+
 From your distro package manager installation of qemu-kvm and all of deps needed... Some distros setup everything for you, some others half of them and  the other half you must do them manually.So, Find your distro way to install properley qemu.
 NOTE: After you install qemu-kvm libvirt etc from your package manager, in case you encounter below error:
 ```
