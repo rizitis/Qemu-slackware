@@ -12,3 +12,20 @@ Everything else you need is in the script...read it!
 
 
 Good Luck ;)
+
+REQUIRE: qemu-system-x86
+
+### TO INSTALL QEMU TO YOUR DISTRO:
+<br>
+
+| `LINUX DISTRBUTION`        | `COMMAND`                            |
+|----------------------------|--------------------------------------|
+| `Debian`                   | `apt-get install qemu-system-x86`    | 
+| `Ubuntu`                   | `apt-get install qemu-system-x86`    | 
+| `Arch Linux`               | `pacman -S qemu-headless`            | 
+| `Kali Linux`               | `apt-get install qemu-system-x86`    | 
+| `Fedora`                   | `dnf install qemu-system-x86-core-2` | 
+| `Raspbian`                 | `apt-get install qemu-system-x86`    | 
+| `........................` | `..................................` | 
+
+
