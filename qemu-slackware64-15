@@ -61,7 +61,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 USR=$(whoami)
-ISO=slackware15.iso
+ISO=slackware64-15.0-install-dvd.iso
 NAME=myslackware.img
 OSFOLDER=/home/$USR/qemu-slackware
 URL=https://altushost-swe.dl.sourceforge.net/project/edk2/OVMF/OVMF-X64-r15214.zip
@@ -74,7 +74,7 @@ CORES=cores=2
 
 mkdir -p /home/"$USR"/qemu-slackware
 cd "$OSFOLDER" || exit
-wget -O  "$OSFOLDER"/slackware15.iso $URL1
+wget -P  "$OSFOLDER" $URL1
 wget -P "$OSFOLDER" $URL2
 
 md5sum -c $PKG2
@@ -110,4 +110,3 @@ qemu-system-x86_64 \
  -cpu host \
  -boot order=c,once=d,menu=on \
  -vga std  -hda $NAME &
-
