@@ -1,0 +1,6 @@
+This script written for Greek studends (ages 12-16).
+Point is:
+- First try of Slackware Linux installation.(format disks gdisk,create root passwd,edit files in /etc, setup user account, groups etc..)
+* First try to install a linux.iso in QEMU using terminal.(what is the terminal use and power)
++ To play (edit) with the script and customise it at home.(create their own simple script no matter if its running properly but learn how to use shellcheck)
+
