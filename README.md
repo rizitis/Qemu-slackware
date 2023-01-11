@@ -8,10 +8,7 @@ Download: open a terminal:
 wget https://raw.githubusercontent.com/rizitis/Qemu-slackware/main/qemu-slackware64-15
 chmod +x qemu-slackware64-15
 ```
-Everything else you need is in the script...read it!
 
-
-Good Luck ;)
 
 ### REQUIRED: 
 
@@ -35,4 +32,11 @@ This way you can install it to some of distros...find yours if its not here:
 | `Raspbian`                 | `apt-get install qemu-system-x86`    | 
 | `........................` | `..................................` | 
 
+
+
+Everything else you need is in the script...
+### read it!
+
+
+Good Luck ;)
 
