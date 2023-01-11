@@ -69,7 +69,7 @@ CORES=cores=10
 
 mkdir -p /home/"$USR"/qemu-slackware
 cd "$OSFOLDER" || exit
-wget -PO  "$OSFOLDER"/slackware15.iso $URL1
+wget -O  "$OSFOLDER"/slackware15.iso $URL1
 wget -P "$OSFOLDER" $URL2
 md5sum $ISO $PKG2
 sleep 5
