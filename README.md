@@ -40,3 +40,5 @@ Everything else you need is in the script...
 
 Good Luck ;)
 
+
+PS: we will not need virt-manager, we can do our job in a Linux-terminal... it doesnt hurt :) 
