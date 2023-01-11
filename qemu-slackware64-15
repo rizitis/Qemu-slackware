@@ -71,7 +71,8 @@ mkdir -p /home/"$USR"/qemu-slackware
 cd "$OSFOLDER" || exit
 wget -O  "$OSFOLDER"/slackware15.iso $URL1
 wget -P "$OSFOLDER" $URL2
-md5sum $ISO $PKG2
+md5sum $ISO 
+cat $PKG2
 sleep 5
 wget $URL
 unzip $PKG
