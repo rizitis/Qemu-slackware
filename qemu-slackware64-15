@@ -28,7 +28,7 @@
 
 # After installation finish, you can boot from your myslackware.img like this:
 # open a terminal in the folder /home/user/qemu-slackware and run:
-#  qemu-sqemu-system-x86_64 -bios OVMF.fd -hda myslackware.img -enable-kvm  -m 8G -smp cores=10 -cpu host -boot order=c,once=d,menu=on -vga std
+#  qemu-sqemu-system-x86_64 -bios OVMF.fd -hda myslackware.img -enable-kvm  -m 2G -smp cores=2 -cpu host -boot order=c,once=d,menu=on -vga std
 # Ofcource you can edit these as your hardware will work better... (cores=? -m ?G etc)
 #
 # issues 
