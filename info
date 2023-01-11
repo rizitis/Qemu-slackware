@@ -1,6 +1,6 @@
 This script written for Greek studends (ages 12-16).
 Point is:
 1. First try of Slackware Linux installation.(format disks gdisk,create root passwd,edit files in /etc, setup user account, groups etc..)
-2. First try to install a linux.iso in QEMU using terminal.(what is the terminal use and power)
-3. To play (edit) with the script and customise it at home.(create their own simple script no matter if its running properly but learn how to use shellcheck)
+2. First try to install a linux.iso in QEMU using terminal.(will will not give access to greit tool virt-manager this time)
+3. To play (edit) with the script and customise it at home.(create their own simple script downloading other distro also the same way, no matter if its running properly but learn how to use shellcheck)
 
