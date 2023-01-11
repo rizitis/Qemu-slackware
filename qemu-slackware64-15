@@ -19,7 +19,7 @@
 # And then just comand:
 # ./qemu-slackware64-15  to run script.
 #
-# 3) Script will create a qemu base.img which will need 80G of your space. If you dont like that, change the space value as you like at 94 line in this script (80G)
+# 3) Script will create a qemu base.img which will need 80G of your space. If you dont like that, change the space value as you like at line 100 in this script (80G)
 #
 # 4) It will download the OVMF.zip and will unzip it also, so we can boot Slackware64 in UEFI mode
 # AND it will download slackware64.iso after that it will check md5summ files and then QEMU will boot slackware.iso in your 80G virtuall hdd myslackware.img you created.
@@ -76,8 +76,14 @@ mkdir -p /home/"$USR"/qemu-slackware
 cd "$OSFOLDER" || exit
 wget -O  "$OSFOLDER"/slackware15.iso $URL1
 wget -P "$OSFOLDER" $URL2
-md5sum $ISO 
-cat $PKG2
+md5sum -c slackware64-15.0-install-dvd.iso.md5
+
+if [ $? -eq 0 ]; then
+  echo File is fine. lets continue...
+else
+  echo File is broken, stop here!
+  exit
+fi
 sleep 5
 wget $URL
 unzip $PKG
